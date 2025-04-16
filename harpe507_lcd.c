@@ -19,18 +19,14 @@
 
 static inline void i2c_start(void)
 {
-    LATB |= (1 << 5);
     I2C1CONbits.SEN = 1;
     while (I2C1CONbits.SEN);
-    LATB &= (0xffff ^ (1 << 5));
 }
 
 static inline void i2c_end(void)
 {
-    LATB |= (1 << 5);
     I2C1CONbits.PEN = 1;
     while (I2C1CONbits.PEN);
-    LATB &= (0xffff ^ (1 << 5));
 }
 
 void lcd_write_1(uint8_t byte)
