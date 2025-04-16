@@ -21,6 +21,12 @@ void delay(int ms){
     }
 }
 
+//interrupt for clearing lcd
+void __attribute__((__interrupt__,__auto_psv__))IC1Interrupt(void){
+    _IC1IF = 0; //clear interrupt
+    delay(20); //debounce
+    clear_lcd();
+}
 // --- ADC setup ---
 void setupADC(void){
     AD1PCFG = 0x0000; // All ANx analog mode
@@ -97,6 +103,12 @@ void printString(const char* str){
 
 // --- Button setup ---
 void setupButtons(void){
+        //configure OC1 to RP6
+    __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
+    RPINR7bits.IC1R = 11;  // Use Pin RP11 = "11", for Input Capture 1 (Table 10-2)
+    RPINR7bits.IC2R = 10;  // Use Pin RP110 = "10", for Input Capture 2 (Table 10-2)
+    __builtin_write_OSCCONL(OSCCON | 0x40); // lock   PPS
+    
     TRISBbits.TRISB10 = 1; // Set as input
     TRISBbits.TRISB11 = 1;
 
