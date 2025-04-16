@@ -27,6 +27,23 @@ void __attribute__((__interrupt__,__auto_psv__))IC1Interrupt(void){
     delay(20); //debounce
     clear_lcd();
 }
+
+//interrupt for reading data
+void __attribute__((__interrupt__,__auto_psv__))IC2Interrupt(void){
+    _IC2IF = 0; //clear interrupt
+   delay(DEBOUNCE_MS);
+    if (!PORTBbits.RB10){
+        char c = readPunchCard();
+        int len = strlen(displayStr);
+        if (len < 16) {
+            displayStr[len] = c;
+            displayStr[len+1] = '\0';
+            clear_lcd();
+            printString(displayStr);
+        }
+    }
+}
+
 // --- ADC setup ---
 void setupADC(void){
     AD1PCFG = 0x0000; // All ANx analog mode
@@ -140,30 +157,6 @@ int main(void){
     printString(displayStr);
 
     while(1){
-        if (!PORTBbits.RB10){ // Read button
-            delay(DEBOUNCE_MS);
-            if (!PORTBbits.RB10){
-                char c = readPunchCard();
-                int len = strlen(displayStr);
-                if (len < 16) {
-                    displayStr[len] = c;
-                    displayStr[len+1] = '\0';
-                    clear_lcd();
-                    printString(displayStr);
-                }
-                while (!PORTBbits.RB10); // wait release
-            }
-        }
-
-        if (!PORTBbits.RB11){ // Reset button
-            delay(DEBOUNCE_MS);
-            if (!PORTBbits.RB11){
-                displayStr[0] = '\0';
-                clear_lcd();
-                printString(displayStr);
-                while (!PORTBbits.RB11);
-            }
-        }
     }
     return 0;
 }
