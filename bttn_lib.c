@@ -7,5 +7,5 @@ void setupButtons(void){
     AD1PCFGbits.PCFG11 = 1; // RB11 digital
 
     CNPU1bits.CN15PUE = 1;  // Enable pull-up on RB11 (CN15)
-    CNPU2bits.CN16PUE = 1;  // Enable pull-up on RB10 (CN17)
+    CNPU2bits.CN16PUE = 1;  // Enable pull-up on RB10 (CN16)
 }
