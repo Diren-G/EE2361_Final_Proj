@@ -1,7 +1,7 @@
 #include "xc.h"
 #include "stdio.h"
 #include "stdint.h"
-#include "lcdlib.c"
+#include "lcdlib.h"
 #include <string.h>
 #include "adc_lib.h"
 #include "bttn_lib.h"
@@ -38,7 +38,7 @@ char readPunchCard(void){
 void __attribute__((__interrupt__,__auto_psv__))_IC1Interrupt(void){
     _IC1IF = 0; //clear interrupt
     delay(20); //debounce
-    lcd_clear();
+    clearLCD();
 }
 
 //interrupt for reading data
@@ -51,8 +51,8 @@ void __attribute__((__interrupt__,__auto_psv__))_IC2Interrupt(void){
         if (len < 16) {
             displayStr[len] = c;
             displayStr[len+1] = '\0';
-            lcd_clear();
-            lcd_print_str(displayStr);
+            clearLCD();
+            printString(displayStr);
         }
     }
 }
@@ -61,7 +61,7 @@ void __attribute__((__interrupt__,__auto_psv__))_IC2Interrupt(void){
 int main(void){
     CLKDIVbits.RCDIV = 0;
     setupADC();
-    lcd_init();
+    initLCD();
     setupButtons();
     
 
