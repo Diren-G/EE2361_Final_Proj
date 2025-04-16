@@ -1,6 +1,7 @@
 #include "xc.h"
 #include "stdio.h"
 #include "stdint.h"
+#include "harpe507_lcd.h"
 #include <string.h>
 
 #define FCY 16000000UL
@@ -47,53 +48,6 @@ float readAvgVoltage(int ch){
     return (3.3 * avg) / 1024.0;
 }
 
-// --- LCD (reuse from original) ---
-void lcd_cmd(char command){
-    _SEN = 1; while(_SEN == 1);
-    _MI2C1IF = 0; I2C1TRN = LCDaddy_writ; while(!_MI2C1IF || _TRSTAT);
-    _MI2C1IF = 0; I2C1TRN = 0x00;         while(!_MI2C1IF || _TRSTAT);
-    _MI2C1IF = 0; I2C1TRN = command;      while(!_MI2C1IF || _TRSTAT);
-    _PEN = 1; while(_PEN == 1);
-}
-
-void clear_lcd(void){
-    lcd_cmd(0x01);
-}
-
-void initLCD(void){
-    I2C1CON = 0; I2C1BRG = 157;
-    _MI2C1IF = 0; I2C1CONbits.I2CEN = 1;
-    delay(40);
-    PORTBbits.RB6 = 0; delay(40);
-    PORTBbits.RB6 = 1; delay(40);
-    lcd_cmd(0x3A); lcd_cmd(0x09); lcd_cmd(0x06); lcd_cmd(0x1E); lcd_cmd(0x39);
-    lcd_cmd(0x1B); lcd_cmd(0x6E); lcd_cmd(0x56); lcd_cmd(contrast);
-    lcd_cmd(0x38); lcd_cmd(0x0F);
-    delay(200);
-    lcd_cmd(0x3A); lcd_cmd(0x09); lcd_cmd(0x1A); lcd_cmd(0x3C);
-    delay(2);
-    clear_lcd();
-}
-
-void set_cursor(int x, int y){
-    int cursor_loc = (0x20 * x + y) | 0b10000000;
-    lcd_cmd(cursor_loc);
-}
-
-void printChar(char myChar){
-    _SEN = 1; while(_SEN == 1);
-    _MI2C1IF = 0; I2C1TRN = LCDaddy_writ; while(!_MI2C1IF || _TRSTAT);
-    _MI2C1IF = 0; I2C1TRN = 0x40;         while(!_MI2C1IF || _TRSTAT);
-    _MI2C1IF = 0; I2C1TRN = myChar;       while(!_MI2C1IF || _TRSTAT);
-    _PEN = 1; while(_PEN == 1);
-}
-
-void printString(const char* str){
-    set_cursor(0,0);
-    for(int i = 0; str[i] != 0; i++){
-        printChar(str[i]);
-    }
-}
 
 // --- Button setup ---
 void setupButtons(void){
@@ -127,7 +81,7 @@ char readPunchCard(void){
 void __attribute__((__interrupt__,__auto_psv__))IC1Interrupt(void){
     _IC1IF = 0; //clear interrupt
     delay(20); //debounce
-    clear_lcd();
+    lcd_clear();
 }
 
 //interrupt for reading data
@@ -140,8 +94,8 @@ void __attribute__((__interrupt__,__auto_psv__))IC2Interrupt(void){
         if (len < 16) {
             displayStr[len] = c;
             displayStr[len+1] = '\0';
-            clear_lcd();
-            printString(displayStr);
+            lcd_clear();
+            lcd_print_str(displayStr);
         }
     }
 }
@@ -150,11 +104,11 @@ void __attribute__((__interrupt__,__auto_psv__))IC2Interrupt(void){
 int main(void){
     CLKDIVbits.RCDIV = 0;
     setupADC();
-    initLCD();
+    lcd_init();
     setupButtons();
 
-    clear_lcd();
-    printString(displayStr);
+    lcd_clear();
+    lcd_print_str(displayStr);
 
     while(1){
     }
