@@ -97,6 +97,12 @@ void printString(const char* str){
 
 // --- Button setup ---
 void setupButtons(void){
+        //configure OC1 to RP6
+    __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
+    RPINR7bits.IC1R = 11;  // Use Pin RP11 = "11", for Input Capture 1 (Table 10-2)
+    RPINR7bits.IC2R = 10;  // Use Pin RP110 = "10", for Input Capture 2 (Table 10-2)
+    __builtin_write_OSCCONL(OSCCON | 0x40); // lock   PPS
+    
     TRISBbits.TRISB10 = 1; // Set as input
     TRISBbits.TRISB11 = 1;
 
@@ -117,6 +123,29 @@ char readPunchCard(void){
     return (char)bits;
 }
 
+//interrupt for clearing lcd
+void __attribute__((__interrupt__,__auto_psv__))IC1Interrupt(void){
+    _IC1IF = 0; //clear interrupt
+    delay(20); //debounce
+    clear_lcd();
+}
+
+//interrupt for reading data
+void __attribute__((__interrupt__,__auto_psv__))IC2Interrupt(void){
+    _IC2IF = 0; //clear interrupt
+   delay(DEBOUNCE_MS);
+    if (!PORTBbits.RB10){
+        char c = readPunchCard();
+        int len = strlen(displayStr);
+        if (len < 16) {
+            displayStr[len] = c;
+            displayStr[len+1] = '\0';
+            clear_lcd();
+            printString(displayStr);
+        }
+    }
+}
+
 // --- Main ---
 int main(void){
     CLKDIVbits.RCDIV = 0;
@@ -128,30 +157,6 @@ int main(void){
     printString(displayStr);
 
     while(1){
-        if (!PORTBbits.RB10){ // Read button
-            delay(DEBOUNCE_MS);
-            if (!PORTBbits.RB10){
-                char c = readPunchCard();
-                int len = strlen(displayStr);
-                if (len < 16) {
-                    displayStr[len] = c;
-                    displayStr[len+1] = '\0';
-                    clear_lcd();
-                    printString(displayStr);
-                }
-                while (!PORTBbits.RB10); // wait release
-            }
-        }
-
-        if (!PORTBbits.RB11){ // Reset button
-            delay(DEBOUNCE_MS);
-            if (!PORTBbits.RB11){
-                displayStr[0] = '\0';
-                clear_lcd();
-                printString(displayStr);
-                while (!PORTBbits.RB11);
-            }
-        }
     }
     return 0;
 }
