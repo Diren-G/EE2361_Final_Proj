@@ -1,7 +1,7 @@
 #include "xc.h"
 #include "stdio.h"
 #include "stdint.h"
-#include "harpe507_lcd.h"
+#include "lcdlib.c"
 #include <string.h>
 #include "adc_lib.h"
 #include "bttn_lib.h"
