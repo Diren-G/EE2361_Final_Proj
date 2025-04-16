@@ -112,6 +112,12 @@ void lcd_init(void)
         lcd_write_command(lcdInitCmds[i]);
     }
     lcd_set_cursor(0, 0);
+
+    uint8_t message[] = {
+        0xba, 0xdd, 0xc6, 0xc1, 0xca, 0x00
+    };
+
+    lcd_print_str((char*) message);
 }
 
 void lcd_cursor_right(void)
