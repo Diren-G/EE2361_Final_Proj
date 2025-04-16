@@ -21,29 +21,6 @@ void delay(int ms){
     }
 }
 
-//interrupt for clearing lcd
-void __attribute__((__interrupt__,__auto_psv__))IC1Interrupt(void){
-    _IC1IF = 0; //clear interrupt
-    delay(20); //debounce
-    clear_lcd();
-}
-
-//interrupt for reading data
-void __attribute__((__interrupt__,__auto_psv__))IC2Interrupt(void){
-    _IC2IF = 0; //clear interrupt
-   delay(DEBOUNCE_MS);
-    if (!PORTBbits.RB10){
-        char c = readPunchCard();
-        int len = strlen(displayStr);
-        if (len < 16) {
-            displayStr[len] = c;
-            displayStr[len+1] = '\0';
-            clear_lcd();
-            printString(displayStr);
-        }
-    }
-}
-
 // --- ADC setup ---
 void setupADC(void){
     AD1PCFG = 0x0000; // All ANx analog mode
@@ -144,6 +121,29 @@ char readPunchCard(void){
         bits = (bits << 1) | (v > 0.5 ? 1 : 0);
     }
     return (char)bits;
+}
+
+//interrupt for clearing lcd
+void __attribute__((__interrupt__,__auto_psv__))IC1Interrupt(void){
+    _IC1IF = 0; //clear interrupt
+    delay(20); //debounce
+    clear_lcd();
+}
+
+//interrupt for reading data
+void __attribute__((__interrupt__,__auto_psv__))IC2Interrupt(void){
+    _IC2IF = 0; //clear interrupt
+   delay(DEBOUNCE_MS);
+    if (!PORTBbits.RB10){
+        char c = readPunchCard();
+        int len = strlen(displayStr);
+        if (len < 16) {
+            displayStr[len] = c;
+            displayStr[len+1] = '\0';
+            clear_lcd();
+            printString(displayStr);
+        }
+    }
 }
 
 // --- Main ---
