@@ -82,7 +82,6 @@ void lcd_init(void)
 {
     I2C1CONbits.I2CEN = 0;
     
-    AD1PCFG = 0x9fff;
     TRISBbits.TRISB6 = 0;
     
     // Reset LCD
