@@ -1,3 +1,5 @@
+#include "xc.h"
+
 // --- Button setup ---
 void setupButtons(void){
     TRISBbits.TRISB10 = 1; // Set as input

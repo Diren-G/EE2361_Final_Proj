@@ -1,3 +1,7 @@
+#include "xc.h"
+
+#define NUM_SAMPLES 4
+
 // --- ADC setup ---
 void setupADC(void){
     AD1PCFG = 0x0000; // All ANx analog mode
