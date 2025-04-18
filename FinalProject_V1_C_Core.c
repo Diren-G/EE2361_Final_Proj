@@ -1,72 +1,86 @@
 #include "xc.h"
+#include "stdlib.h"
 #include "stdio.h"
-#include "stdint.h"
 #include "lcdlib.h"
-#include <string.h>
-#include "adc_lib.h"
-#include "bttn_lib.h"
 
-#define FCY 16000000UL
-#define contrast 0x7A
-#define LCDaddy 0b0111100
-#define LCDaddy_writ 0b01111000
-#define NUM_SAMPLES 4
-#define DEBOUNCE_MS 2
+// CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
+#pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
+#pragma config FWDTEN = OFF        // Watchdog Timer Enable (Watchdog Timer is disabled)
+#pragma config GWRP = OFF          // General Code Segment Write Protect (Writes to program memory are allowed)
+#pragma config GCP = OFF           // General Code Segment Code Protect (Code protection is disabled)
+#pragma config JTAGEN = OFF        // JTAG Port Enable (JTAG port is disabled)
 
-const int channels[8] = {0, 1, 4, 5, 9, 10, 11, 12}; // MSB to LSB: AN0 to AN12
-char displayStr[17] = "";  // Holds characters to print
 
-// --- Delay ---
-void delay(int ms){
-    while(ms-- > 0){
-        asm("repeat #15998");
-        asm("nop");
-    }
+// CW2: FLASH CONFIGURATION WORD 2 (see PIC24 Family Reference Manual 24.1)
+#pragma config I2C1SEL = PRI       // I2C1 Pin Location Select (Use default SCL1/SDA1 pins)
+#pragma config IOL1WAY = OFF       // IOLOCK Protection (IOLOCK may be changed via unlocking seq)
+#pragma config OSCIOFNC = ON       // Primary Oscillator I/O Function (CLKO/RC15 functions as I/O pin)
+#pragma config FCKSM = CSECME      // Clock Switching and Monitor (Clock switching is enabled, 
+                                       // Fail-Safe Clock Monitor is enabled)
+#pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
+
+void setup(void){
+    CLKDIVbits.RCDIV = 0;  //Set RCDIV=1:1 (default 2:1) 32MHz or FCY/2=16M
+    AD1PCFG = 0x9fff;            //sets all pins to digital I/O
+    TRISA = 0;  //set port A to outputs, 
+    TRISB = 0;  //and port B to outputs 
+    TRISBbits.TRISB10 = 1;
+    TRISBbits.TRISB11 = 1;
+    _TRISA0 = 1; //A0 is input
+    _TRISA1 = 1; //A1 is input
+    _TRISB2 = 1; //B2 is input
+    _TRISB3 = 1; //B3 is input
+    _TRISB12 = 1; //B12 is input
+    _TRISB13 = 1; //B13 is input
+    _TRISB14 = 1; //B14 is input
+    _TRISB15 = 1; //B15 is input
+
+    
+    CNPU1bits.CN15PUE = 1; //turn on pullup resistor for CN22 = RB8
+    CNPU2bits.CN16PUE = 1; //turn on pullup resistor for CN22 = RB8
 }
 
-// --- Read punch card into ASCII char ---
-char readPunchCard(void){
-    uint8_t bits = 0;
-    for (int i = 0; i < 8; i++) {
-        float v = readAvgVoltage(channels[i]);
-        bits = (bits << 1) | (v > 0.5 ? 1 : 0);
-    }
-    return (char)bits;
-}
+void loop(void)
+{
+    union 
+    {
+        char c;
+        struct
+        {
+            unsigned int bit0;
+            unsigned int bit1;
+            unsigned int bit2;
+            unsigned int bit3;
+            unsigned int bit4;
+            unsigned int bit5;
+            unsigned int bit6;
+            unsigned int bit7;
+        } bits;
+    } c = {0};
 
-//interrupt for clearing lcd
-void __attribute__((__interrupt__,__auto_psv__))_IC1Interrupt(void){
-    _IC1IF = 0; //clear interrupt
-    delay(20); //debounce
-    clearLCD();
-}
-
-//interrupt for reading data
-void __attribute__((__interrupt__,__auto_psv__))_IC2Interrupt(void){
-    _IC2IF = 0; //clear interrupt
-   delay(DEBOUNCE_MS);
-    if (!PORTBbits.RB10){
-        char c = readPunchCard();
-        int len = strlen(displayStr);
-        if (len < 16) {
-            displayStr[len] = c;
-            displayStr[len+1] = '\0';
-            clearLCD();
-            printString(displayStr);
-        }
-    }
-}
-
-// --- Main ---
-int main(void){
-    CLKDIVbits.RCDIV = 0;
-    setupADC();
-    initLCD();
-    setupButtons();
+    c.bits.bit0 = _RA0;
+    c.bits.bit1 = _RA1;
+    c.bits.bit2 = _RB2;
+    c.bits.bit3 = _RB3;
+    c.bits.bit4 = _RB15;
+    c.bits.bit5 = _RB14;
+    c.bits.bit6 = _RB13;
+    c.bits.bit7 = _RB12;
     
 
+    if(_RB11 == 0)
+        clearLCD();
+    if(_RB10 == 0)
+        printChar(c.c);
+}
+
+int main(void){
+    setup();
+    initLCD();
+    
+    printString("hello");
     while(1){
+        loop();
     }
     return 0;
 }
-
