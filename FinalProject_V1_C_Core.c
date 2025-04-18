@@ -72,6 +72,7 @@ void loop(void)
         clearLCD();
     if(_RB10 == 0)
     {
+        delay(2);
         printChar(c.c);
         while (!_RB10);
     }
