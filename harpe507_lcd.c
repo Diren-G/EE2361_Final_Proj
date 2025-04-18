@@ -17,13 +17,13 @@
 #define LCD_CMD ((uint8_t)0x00)
 #define LCD_DATA ((uint8_t)0x40)
 
-void i2c_start(void)
+static inline void i2c_start(void)
 {
     _SEN = 1; //start sequence
     while(_SEN == 1); //wait for start sequence to finish
 }
 
-void i2c_end(void)
+static inline void i2c_end(void)
 {
     _PEN = 1; //stop sequence
     while (_PEN == 1); //wait for stop sequence to finish
@@ -44,9 +44,7 @@ int lcd_write_3(uint8_t bytes[3])
 {
     int error = 0;
     
-    //i2c_start();
-    _SEN = 1; //stop sequence
-    while (_SEN == 1); //wait for stop sequence to finish
+    i2c_start();
     
     for (int i = 0; i < 3; i++)
     {
@@ -61,9 +59,7 @@ int lcd_write_3(uint8_t bytes[3])
         }
     }
     
-    //i2c_end();
-    _PEN = 1; //stop sequence
-    while (_PEN == 1); //wait for stop sequence to finish
+    i2c_end();
     
     return error;
 }
