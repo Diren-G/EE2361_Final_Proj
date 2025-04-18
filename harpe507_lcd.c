@@ -52,7 +52,7 @@ int lcd_write_3(uint8_t bytes[3])
     {
         _MI2C1IF = 0;
         I2C1TRN = bytes[i];
-        while (!(_MI2C1IF));
+        while (!(_MI2C1IF || !_TRSTAT));
         if (I2C1STATbits.ACKSTAT)
         {
             _MI2C1IF = 0;
