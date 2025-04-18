@@ -1,7 +1,8 @@
+#include "harpe507_lab5_asm.h"
 #include "xc.h"
 #include "stdlib.h"
 #include "stdio.h"
-#include "lcdlib.h"
+#include "harpe507_lcd.h"
 
 // CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
 #pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
@@ -69,20 +70,20 @@ void loop(void)
     
 
     if(_RB11 == 0)
-        clearLCD();
+        lcd_clear();
     if(_RB10 == 0)
     {
-        delay(2);
-        printChar(c.c);
+        delay_1ms();
+        delay_1ms();
+        lcd_print_char(c.c);
         while (!_RB10);
     }
 }
 
 int main(void){
     setup();
-    initLCD();
+    lcd_init();
     
-    printString("hello");
     while(1){
         loop();
     }
