@@ -2,7 +2,7 @@
 #include "xc.h"
 #include "stdlib.h"
 #include "stdio.h"
-#include "harpe507_lcd.h"
+#include "lcdlib.h"
 
 // CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
 #pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
@@ -41,6 +41,9 @@ void setup(void){
     CNPU2bits.CN16PUE = 1; //turn on pullup resistor for CN22 = RB8
 }
 
+int cursorx = 0;
+int cursory = 0;
+
 void loop(void)
 {
     union 
@@ -68,21 +71,29 @@ void loop(void)
     c.bits.bit6 = _RB13;
     c.bits.bit7 = _RB12;
     
-
+   
     if(_RB11 == 0)
-        lcd_clear();
+    {
+        clearLCD();
+        cursorx = cursory = 0;
+    }
+    
     if(_RB10 == 0)
     {
-        delay_1ms();
-        delay_1ms();
-        lcd_print_char(c.c);
+        delay(2);
+        printChar(c.c);
+        cursorx = (cursorx == 9 ? 0 : cursorx + 1);
+        cursory = (cursorx == 0 ? cursory + 1 : cursory);
+        if (cursory == 2)
+            cursory = 0;
+        setcursor(cursorx, cursory);
         while (!_RB10);
     }
 }
 
 int main(void){
     setup();
-    lcd_init();
+    initLCD();
     
     while(1){
         loop();
