@@ -71,7 +71,10 @@ void loop(void)
     if(_RB11 == 0)
         clearLCD();
     if(_RB10 == 0)
+    {
         printChar(c.c);
+        while (!_RB10);
+    }
 }
 
 int main(void){
