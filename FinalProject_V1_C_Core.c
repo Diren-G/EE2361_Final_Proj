@@ -47,14 +47,14 @@ void loop(void)
         char c;
         struct
         {
-            unsigned int bit0;
-            unsigned int bit1;
-            unsigned int bit2;
-            unsigned int bit3;
-            unsigned int bit4;
-            unsigned int bit5;
-            unsigned int bit6;
-            unsigned int bit7;
+            unsigned int bit0 : 1;
+            unsigned int bit1 : 1;
+            unsigned int bit2 : 1;
+            unsigned int bit3 : 1;
+            unsigned int bit4 : 1;
+            unsigned int bit5 : 1;
+            unsigned int bit6 : 1;
+            unsigned int bit7 : 1;
         } bits;
     } c = {0};
 
