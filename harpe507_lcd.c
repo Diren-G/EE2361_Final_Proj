@@ -83,6 +83,10 @@ void lcd_init(void)
     I2C1CONbits.I2CEN = 0;
     
     TRISBbits.TRISB6 = 0;
+
+    // Initialize I²C pin pull-up resistors
+    _CN21PUE = 1;
+    _CN22PUE = 1;
     
     // Reset LCD
     LATB |= (1 << 6);
@@ -91,10 +95,6 @@ void lcd_init(void)
     delay_200us();
     LATB |= (1 << 6);
     delay_1ms();
-    
-    // Initialize I²C pin pull-up resistors
-    _CN21PUE = 1;
-    _CN22PUE = 1;
     
     // Initialize I²C Properties
     I2C1BRG = 0x9d;
