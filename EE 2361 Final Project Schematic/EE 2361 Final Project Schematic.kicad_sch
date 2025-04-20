@@ -1,0 +1,845 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "62f369e1-4d0d-418e-ac11-d546073c4771")
+	(paper "A4")
+	(lib_symbols
+		(symbol "pic24:Unknown"
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" ""
+				(at 86.36 12.7 0)
+				(effects
+					(font
+						(size 1.524 1.524)
+					)
+				)
+			)
+			(property "Value" "Unknown"
+				(at 86.36 10.16 0)
+				(effects
+					(font
+						(size 1.524 1.524)
+					)
+				)
+			)
+			(property "Footprint" "SPDIP28_300MC"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "Unknown"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "Unknown"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SPDIP28_300MC"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Unknown_1_1"
+				(polyline
+					(pts
+						(xy 7.62 -40.64) (xy 165.1 -40.64)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 7.62) (xy 7.62 -40.64)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 165.1 -40.64) (xy 165.1 7.62)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 165.1 7.62) (xy 7.62 7.62)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin unspecified line
+					(at 0 0 0)
+					(length 7.62)
+					(name "*MCLR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -7.62 0)
+					(length 7.62)
+					(name "OSCO/CLKO/CN29/PMA0/RA3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -25.4 0)
+					(length 7.62)
+					(name "SOSCI/RP4/PMBE/CN1/RB4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -27.94 0)
+					(length 7.62)
+					(name "SOSCO/T1CK/CN0/PMA1/RA4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 -27.94 180)
+					(length 7.62)
+					(name "PGD3/EMUD3/RP5/ASDA1/CN27/PMD7/RB5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -17.78 0)
+					(length 7.62)
+					(name "PGC3/EMUC3/RP6/ASCL1/CN24/PMD6/RB6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -20.32 0)
+					(length 7.62)
+					(name "RP7/INT0/CN23/PMD5/RB7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -30.48 0)
+					(length 7.62)
+					(name "TCK/RP8/SCL1/CN22/PMD4/RB8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -33.02 0)
+					(length 7.62)
+					(name "TDO/RP9/SDA1/CN21/PMD3/RB9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -2.54 0)
+					(length 7.62)
+					(name "DISVREG"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 0 180)
+					(length 7.62)
+					(name "AN0/VREF+/CN2/RA0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -35.56 0)
+					(length 7.62)
+					(name "VCAP/VDDCORE"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 -25.4 180)
+					(length 7.62)
+					(name "PGD2/EMUD2/TDI/RP10/CN16/PMD2/RB10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -15.24 0)
+					(length 7.62)
+					(name "PGC2/EMUC2/TMS/RP11/CN15/PMD1/RB11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 -17.78 180)
+					(length 7.62)
+					(name "AN12/RP12/CN14/PMD0/RB12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 -15.24 180)
+					(length 7.62)
+					(name "AN11/RP13/CN13/PMRD/RB13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 -12.7 180)
+					(length 7.62)
+					(name "AN10/CVREF/RTCC/RP14/CN12/PMWR/RB14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "25"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 -10.16 180)
+					(length 7.62)
+					(name "AN9/RP15/CN11/PMCS1/RB15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "26"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 -2.54 180)
+					(length 7.62)
+					(name "AN1/VREF-/CN3/RA1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 -22.86 180)
+					(length 7.62)
+					(name "PGD1/EMUD1/AN2/C2IN-/RP0/CN4/RB0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -12.7 0)
+					(length 7.62)
+					(name "PGC1/EMUC1/AN3/C2IN+/RP1/CN5/RB1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 -5.08 180)
+					(length 7.62)
+					(name "AN4/C1IN-/RP2/SDA2/CN6/RB2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 172.72 -7.62 180)
+					(length 7.62)
+					(name "AN5/C1IN+/RP3/SCL2/CN7/RB3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -5.08 0)
+					(length 7.62)
+					(name "OSCI/CLKI/CN30/RA2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "Unknown_2_1"
+				(polyline
+					(pts
+						(xy 7.62 -15.24) (xy 33.02 -15.24)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 7.62) (xy 7.62 -15.24)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 33.02 -15.24) (xy 33.02 7.62)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 33.02 7.62) (xy 7.62 7.62)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin unspecified line
+					(at 0 0 0)
+					(length 7.62)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -10.16 0)
+					(length 7.62)
+					(name "VSS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "27"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -2.54 0)
+					(length 7.62)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "28"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -7.62 0)
+					(length 7.62)
+					(name "VSS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "pic24:Unknown")
+		(at 60.96 46.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b696b994-81d7-4271-8ff8-d7055f1abd8e")
+		(property "Reference" "1"
+			(at 147.32 34.29 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Value" "Unknown"
+			(at 147.32 36.83 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Footprint" "SPDIP28_300MC"
+			(at 60.96 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "Unknown"
+			(at 60.96 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 60.96 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "17"
+			(uuid "3d758874-6bad-4d48-b99a-6c1166998838")
+		)
+		(pin "20"
+			(uuid "5f6cddca-36d2-4704-b4a2-a9c0a833f18d")
+		)
+		(pin "28"
+			(uuid "edf2542f-b470-42aa-9b9a-97df4feb1005")
+		)
+		(pin "9"
+			(uuid "3883c3a3-a83c-4b5d-ab56-d6adc341640d")
+		)
+		(pin "6"
+			(uuid "89fb5af7-5eca-4f4d-a36d-caaae92f35fe")
+		)
+		(pin "2"
+			(uuid "f29a17a3-9aa4-45c0-85fb-d9973cdfc2ef")
+		)
+		(pin "24"
+			(uuid "8fc53554-2933-4b91-9a55-6b802aa8f367")
+		)
+		(pin "14"
+			(uuid "fc268eca-94b9-4eaf-bda1-108c14ce8d84")
+		)
+		(pin "5"
+			(uuid "42a101aa-644e-4cda-828b-af8f8873db80")
+		)
+		(pin "4"
+			(uuid "05081db0-7fca-43ae-9912-9583881a6ff2")
+		)
+		(pin "13"
+			(uuid "3d4dc821-9c53-4263-a15f-ab00c8163bc3")
+		)
+		(pin "25"
+			(uuid "d15aff09-233c-4411-abf8-4398d8eac1be")
+		)
+		(pin "10"
+			(uuid "2e1bb7b8-514d-4bfe-b686-8c5dd4fb7d84")
+		)
+		(pin "15"
+			(uuid "4d14c33f-2aee-454f-8b5a-ae051600a0fa")
+		)
+		(pin "19"
+			(uuid "d1cd6ef6-41ba-447e-9fe4-14efc02a7830")
+		)
+		(pin "23"
+			(uuid "eccca7f2-d7d7-455d-b725-22ffd909c885")
+		)
+		(pin "8"
+			(uuid "7df5a5e8-283a-4ce3-81a6-43fec296d273")
+		)
+		(pin "18"
+			(uuid "59ae4a68-d62c-4d26-8052-5cd614602bab")
+		)
+		(pin "27"
+			(uuid "36589383-aaa4-4d71-b52e-4a6dbd5e3964")
+		)
+		(pin "26"
+			(uuid "c18fd6a5-007a-4b28-95a1-63e72e7a2a77")
+		)
+		(pin "22"
+			(uuid "085d787a-0e75-49df-835d-0817bbe7d6fe")
+		)
+		(pin "21"
+			(uuid "811dcd37-ba98-4676-8da4-b5f64de1ae1c")
+		)
+		(pin "3"
+			(uuid "44bd8e07-0101-497d-bad5-2dc2b89217f5")
+		)
+		(pin "16"
+			(uuid "1690de1d-99ef-4353-90c0-ceffd5bceaef")
+		)
+		(pin "7"
+			(uuid "adb9f759-2539-4f19-ab12-2517f5a610ca")
+		)
+		(pin "1"
+			(uuid "bf2b071c-1569-4e9b-b4a6-7944b9da0f4c")
+		)
+		(pin "12"
+			(uuid "1841ae52-eb84-4609-a993-e362725ede48")
+		)
+		(pin "11"
+			(uuid "67cf5ae8-0b80-4a63-90da-747402296620")
+		)
+		(instances
+			(project ""
+				(path "/62f369e1-4d0d-418e-ac11-d546073c4771"
+					(reference "1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
