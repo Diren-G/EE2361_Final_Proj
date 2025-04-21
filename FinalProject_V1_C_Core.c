@@ -80,13 +80,13 @@ void loop(void)
     
     if(_RB10 == 0)
     {
-        delay(2);
+        delay(100);
         printChar(c.c);
         cursorx = (cursorx == 9 ? 0 : cursorx + 1);
         cursory = (cursorx == 0 ? cursory + 1 : cursory);
         if (cursory == 2)
             cursory = 0;
-        setcursor(cursorx, cursory);
+        setcursor(cursory, cursorx);
         while (!_RB10);
     }
 }
