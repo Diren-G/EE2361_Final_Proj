@@ -44,7 +44,7 @@ void setup(void){
 int cursorx = 0;
 int cursory = 0;
 
-void loop(void)
+char read_char(void)
 {
     union 
     {
@@ -70,23 +70,44 @@ void loop(void)
     c.bits.bit5 = _RB14;
     c.bits.bit6 = _RB13;
     c.bits.bit7 = _RB12;
-    
-   
+
+    return c.c;
+}
+
+void read_and_print_char(void)
+{
+    printChar(read_char());
+}
+
+void increment_cursor_pos(void)
+{
+    cursorx = (cursorx == 9 ? 0 : cursorx + 1); 
+    cursory = (cursorx == 0 ? cursory + 1 : cursory);
+    if (cursory == 2)
+        cursory = 0;
+    setcursor(cursory, cursorx);
+}
+
+void decrement_cursor_pos(void)
+{
+    cursorx = (cursorx == 0 ? 9 : cursorx - 1);
+    cursory = (cursorx == 9 ? cursory - 1 : cursory);
+    if (cursory == -1)
+        cursory = 1;
+    setcursor(cursory, cursorx);
+}
+
+void loop(void)
+{
     if(_RB11 == 0)
     {
-        clearLCD();
-        cursorx = cursory = 0;
+        decrement_cursor_pos();
     }
     
     if(_RB10 == 0)
     {
         delay(100);
-        printChar(c.c);
-        cursorx = (cursorx == 9 ? 0 : cursorx + 1); 
-        cursory = (cursorx == 0 ? cursory + 1 : cursory);
-        if (cursory == 2)
-            cursory = 0;
-        setcursor(cursory, cursorx);
+        read_and_print_char();
         while (!_RB10);
     }
 }
