@@ -19,3 +19,8 @@ Supported Functions:
 	
 	- lcd_reset(void)
 		- clears LCD and sets cursor back to origin
+
+Basic Usage Example:
+	- 
+
+Complete Usage Example:
