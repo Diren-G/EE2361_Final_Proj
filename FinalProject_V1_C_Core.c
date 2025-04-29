@@ -77,8 +77,8 @@ char read_char(void)
 
 void increment_cursor_pos(void)
 {
-    cursorx = (cursorx == 9 ? 0 : cursorx + 1); 
-    cursory = (cursorx == 0 ? cursory + 1 : cursory);
+    cursorx = ((cursorx == 9) ? 0 : (cursorx + 1)); 
+    cursory = ((cursorx == 0) ? (cursory + 1) : cursory);
     if (cursory == 2)
         cursory = 0;
     setcursor(cursory, cursorx);
@@ -86,8 +86,8 @@ void increment_cursor_pos(void)
 
 void decrement_cursor_pos(void)
 {
-    cursorx = (cursorx == 0 ? 9 : cursorx - 1);
-    cursory = (cursorx == 9 ? cursory - 1 : cursory);
+    cursorx = ((cursorx == 0) ? 9 : (cursorx - 1));
+    cursory = ((cursorx == 9) ? (cursory - 1) : cursory);
     if (cursory == -1)
         cursory = 1;
     setcursor(cursory, cursorx);
