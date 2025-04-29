@@ -20,7 +20,8 @@
                                        // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
-void setup(void){
+void setup(void)
+{
     CLKDIVbits.RCDIV = 0;  //Set RCDIV=1:1 (default 2:1) 32MHz or FCY/2=16M
     AD1PCFG = 0x9fff;            //sets all pins to digital I/O
     TRISA = 0;  //set port A to outputs, 
@@ -45,42 +46,46 @@ int cursorx = 0;
 int cursory = 0;
 
 // create union structure
-union {
-    char curr_data; // object which packages the 8 bits of information into one parsable piece
-    struct
+
+char read_char(void)
+{
+    union 
     {
-        unsigned int bit0 : 1;
-        unsigned int bit1 : 1;
-        unsigned int bit2 : 1;
-        unsigned int bit3 : 1;
-        unsigned int bit4 : 1;
-        unsigned int bit5 : 1;
-        unsigned int bit6 : 1;
-        unsigned int bit7 : 1;
-    } bits;
+        char c; // object which packages the 8 bits of information into one parsable piece
+        struct
+        {
+            unsigned int bit0 : 1;
+            unsigned int bit1 : 1;
+            unsigned int bit2 : 1;
+            unsigned int bit3 : 1;
+            unsigned int bit4 : 1;
+            unsigned int bit5 : 1;
+            unsigned int bit6 : 1;
+            unsigned int bit7 : 1;
+        } bits;
+    } c = {0};
+
+    c.bits.bit0 = _RA0;
+    c.bits.bit1 = _RA1;
+    c.bits.bit2 = _RB2;
+    c.bits.bit3 = _RB3;
+    c.bits.bit4 = _RB15;
+    c.bits.bit5 = _RB14;
+    c.bits.bit6 = _RB13;
+    c.bits.bit7 = _RB12;
+
+    return c.c;
 }
 
-void update_data(void){
-    curr_data = {0};
-
-    curr_data.bits.bit0 = _RA0;
-    curr_data.bits.bit1 = _RA1;
-    curr_data.bits.bit2 = _RB2;
-    curr_data.bits.bit3 = _RB3;
-    curr_data.bits.bit4 = _RB15;
-    curr_data.bits.bit5 = _RB14;
-    curr_data.bits.bit6 = _RB13;
-    curr_data.bits.bit7 = _RB12;
-}
-
-void lcd_reset(void){
+void lcd_reset(void)
+{
     clearLCD();
     cursorx = cursory = 0;
 }
 
-void print_data(void){
-    delay(100);
-    printChar(curr_data.curr_data);
+void print_char(char c)
+{
+    printChar(c);
     cursorx = (cursorx == 9 ? 0 : cursorx + 1); 
     cursory = (cursorx == 0 ? cursory + 1 : cursory);
     if (cursory == 2)
@@ -90,18 +95,21 @@ void print_data(void){
 }
 
 
-int main(void){
+int main(void)
+{
     setup();
     initLCD();
     
-    while(1){
-        if(_RB11 == 0){
+    while(1)
+    {
+        if(_RB11 == 0)
+        {
             lcd_reset();
         }
         
-        if(_RB10 == 0){
-            update_data();
-            print_data();
+        if(_RB10 == 0)
+        {
+            print_char(read_char());
         }
     }
     return 0;
