@@ -103,7 +103,9 @@ void loop(void)
 {
     if (_RB11 == 0)
     {
+        delay(100);
         decrement_cursor_pos();
+        while(!_RB11);
     }
     
     if (_RB10 == 0)
