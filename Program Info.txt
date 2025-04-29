@@ -1,2 +1,15 @@
 EE 2361 - Hollerith Project
 
+Supported Hardware:
+	- PIC24fj64ga002 microcontroller
+	- Adafruit 161 Photoresistor
+	- DOGS104-A I2C LCD
+
+update_data(void)
+	- Populates the structure with the most recent data from the input pins
+
+lcd_reset(void)
+	- clears LCD and sets cursor back to origin
+
+print_data(void)
+	- prints the character read by the sensors at the time of button press to LCD
