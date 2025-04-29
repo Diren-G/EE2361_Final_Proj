@@ -1,15 +1,21 @@
 EE 2361 - Hollerith Project
 
+Aim: 
+	- Create a modernized version of the Hollerith punch card reader utilizing the PIC24fj64ga002 and photoresistors
+
 Supported Hardware:
 	- PIC24fj64ga002 microcontroller
 	- Adafruit 161 Photoresistor
+		- https://www.adafruit.com/product/161
 	- DOGS104-A I2C LCD
+		- https://www.digikey.com/en/product-highlight/e/electronic-assembly-gmbh/dogs104-a-series-compact-low-power-flexible-character-lcd
 
-update_data(void)
-	- Populates the structure with the most recent data from the input pins
+Supported Functions:
+	- update_data(void)
+		- Populates the structure with the most recent data from the input pins
 
-lcd_reset(void)
-	- clears LCD and sets cursor back to origin
-
-print_data(void)
-	- prints the character read by the sensors at the time of button press to LCD
+	- print_data(void)
+		- prints the character read by the sensors at the time of button press to LCD
+	
+	- lcd_reset(void)
+		- clears LCD and sets cursor back to origin
