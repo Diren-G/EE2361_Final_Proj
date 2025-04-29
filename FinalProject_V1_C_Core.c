@@ -20,7 +20,8 @@
                                        // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
-void setup(void){
+void setup(void)
+{
     CLKDIVbits.RCDIV = 0;  //Set RCDIV=1:1 (default 2:1) 32MHz or FCY/2=16M
     AD1PCFG = 0x9fff;            //sets all pins to digital I/O
     TRISA = 0;  //set port A to outputs, 
@@ -62,21 +63,16 @@ char read_char(void)
         } bits;
     } c = {0};
 
-    c.bits.bit0 = _RA0;
-    c.bits.bit1 = _RA1;
-    c.bits.bit2 = _RB2;
-    c.bits.bit3 = _RB3;
-    c.bits.bit4 = _RB15;
-    c.bits.bit5 = _RB14;
-    c.bits.bit6 = _RB13;
-    c.bits.bit7 = _RB12;
+    c.bits.bit7 = _RA0;
+    c.bits.bit6 = _RA1;
+    c.bits.bit5 = _RB2;
+    c.bits.bit4 = _RB3;
+    c.bits.bit3 = _RB15;
+    c.bits.bit2 = _RB14;
+    c.bits.bit1 = _RB13;
+    c.bits.bit0 = _RB12;
 
     return c.c;
-}
-
-void read_and_print_char(void)
-{
-    printChar(read_char());
 }
 
 void increment_cursor_pos(void)
@@ -97,14 +93,20 @@ void decrement_cursor_pos(void)
     setcursor(cursory, cursorx);
 }
 
+void read_and_print_char(void)
+{
+    printChar(read_char());
+    increment_cursor_pos();
+}
+
 void loop(void)
 {
-    if(_RB11 == 0)
+    if (_RB11 == 0)
     {
         decrement_cursor_pos();
     }
     
-    if(_RB10 == 0)
+    if (_RB10 == 0)
     {
         delay(100);
         read_and_print_char();
@@ -112,11 +114,13 @@ void loop(void)
     }
 }
 
-int main(void){
+int main(void)
+{
     setup();
     initLCD();
     
-    while(1){
+    while (1)
+    {
         loop();
     }
     return 0;
