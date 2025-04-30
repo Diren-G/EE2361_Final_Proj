@@ -11,14 +11,21 @@ Supported Hardware:
 		- https://www.digikey.com/en/product-highlight/e/electronic-assembly-gmbh/dogs104-a-series-compact-low-power-flexible-character-lcd
 
 Supported Functions:
-	- update_data(void)
-		- Populates the structure with the most recent data from the input pins
+	- char read_char(void)
+		- returns the character corresponding to the measured bits from the photoresistor
 
-	- print_data(void)
-		- prints the character read by the sensors at the time of button press to LCD
+	- void increment_cursor_pos(void)
+		- increases the cursor position within the bounded box of the DOGS104-A to prevent off screen characters
+		- wraps the cursor position around such that it also utilizes the following line
 	
-	- lcd_reset(void)
-		- clears LCD and sets cursor back to origin
+	- void decrement_cursor_pos(void)
+		- decreases the cursor position within the bounded box
+		- utilized for creating an effective backspace to correct errors on the fly 
+
+	- void read_and_print_char(void)
+		- short hand function which allows the user to read the current value and immediately print it
+
+
 
 Basic Usage Example:
 	- 

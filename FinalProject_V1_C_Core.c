@@ -119,7 +119,13 @@ void loop(void)
 {
     if (_RB11 == 0)
     {
+        delay(100);
         decrement_cursor_pos();
+        printChar(0xA0);
+        cursorx = ((cursorx == 9) ? 0 : (cursorx + 1)); 
+        cursory = ((cursorx == 0) ? (cursory + 1) : cursory);
+        decrement_cursor_pos();
+        while(!_RB11);
     }
     
     if (_RB10 == 0)

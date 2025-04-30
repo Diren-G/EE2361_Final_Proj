@@ -3753,7 +3753,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47k"
+		(property "Value" "1k"
 			(at 205.74 129.5399 0)
 			(effects
 				(font
@@ -4138,7 +4138,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47k"
+		(property "Value" "1k"
 			(at 154.94 129.5399 0)
 			(effects
 				(font
@@ -4208,7 +4208,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47k"
+		(property "Value" "1k"
 			(at 78.74 129.5399 0)
 			(effects
 				(font
@@ -4415,7 +4415,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47k"
+		(property "Value" "1k"
 			(at 53.34 129.5399 0)
 			(effects
 				(font
@@ -4622,7 +4622,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+5V"
+		(property "Value" "+3.3V"
 			(at 139.7 106.68 0)
 			(effects
 				(font
@@ -4758,7 +4758,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47k"
+		(property "Value" "1k"
 			(at 104.14 129.5399 0)
 			(effects
 				(font
@@ -4828,7 +4828,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47k"
+		(property "Value" "1k"
 			(at 231.14 129.5399 0)
 			(effects
 				(font
@@ -5107,7 +5107,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47k"
+		(property "Value" "1k"
 			(at 129.54 129.5399 0)
 			(effects
 				(font
@@ -5177,7 +5177,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47k"
+		(property "Value" "1k"
 			(at 180.34 129.5399 0)
 			(effects
 				(font
