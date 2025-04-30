@@ -47,9 +47,15 @@ int cursory = 0;
 
 char read_char(void)
 {
+    // Here, we declare c in a somewhat unconventional way.
+    // The union stores all of its members in the same memory location.
+    // This allows us to have both the character and the bits struct reference
+    // the same data. The members of the struct are bitfields, using a width of
+    // 1 bit to address each bit of the character individually.
+    // This makes constructing the character from the input values trivial.
     union 
     {
-        char c; // object which packages the 8 bits of information into one parsable piece
+        char c;
         struct
         {
             unsigned int bit0 : 1;
@@ -63,6 +69,7 @@ char read_char(void)
         } bits;
     } c = {0};
 
+    // Assign each bit with its respective photoresistor value.
     c.bits.bit7 = _RA0;
     c.bits.bit6 = _RA1;
     c.bits.bit5 = _RB2;
@@ -72,11 +79,16 @@ char read_char(void)
     c.bits.bit1 = _RB13;
     c.bits.bit0 = _RB12;
 
+    // Return the same data as a character instead.
     return c.c;
 }
 
 void increment_cursor_pos(void)
 {
+    // This function handles line overflow- if the x position reaches the end of
+    // the line, it goes back to the beginning. The y position is incremented
+    // if x is 0(meaning it finished a line), and, finally, if it is past the
+    // second line of the LCD, it returns to the first one.
     cursorx = ((cursorx == 9) ? 0 : (cursorx + 1)); 
     cursory = ((cursorx == 0) ? (cursory + 1) : cursory);
     if (cursory == 2)
@@ -86,6 +98,8 @@ void increment_cursor_pos(void)
 
 void decrement_cursor_pos(void)
 {
+    // This one works similarly to the increment function, but in the other
+    // direction.
     cursorx = ((cursorx == 0) ? 9 : (cursorx - 1));
     cursory = ((cursorx == 9) ? (cursory - 1) : cursory);
     if (cursory == -1)
@@ -96,6 +110,8 @@ void decrement_cursor_pos(void)
 void read_and_print_char(void)
 {
     printChar(read_char());
+    // This call is necessary to handle the line wrapping and keep track of the
+    // cursor's position on the screen.
     increment_cursor_pos();
 }
 
