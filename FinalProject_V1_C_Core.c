@@ -1,4 +1,3 @@
-#include "harpe507_lab5_asm.h"
 #include "xc.h"
 #include "stdlib.h"
 #include "stdio.h"
@@ -45,6 +44,7 @@ void setup(void)
 int cursorx = 0;
 int cursory = 0;
 
+// Reads a single character from the photoresistors and returns it.
 char read_char(void)
 {
     // Here, we declare c in a somewhat unconventional way.
@@ -83,6 +83,8 @@ char read_char(void)
     return c.c;
 }
 
+// Moves the cursor forward one position, keeping track of line width and line
+// count.
 void increment_cursor_pos(void)
 {
     // This function handles line overflow- if the x position reaches the end of
@@ -96,6 +98,8 @@ void increment_cursor_pos(void)
     setcursor(cursory, cursorx);
 }
 
+// Moves the cursor back one position, keeping track of line width and line
+// count.
 void decrement_cursor_pos(void)
 {
     // This one works similarly to the increment function, but in the other
@@ -107,6 +111,7 @@ void decrement_cursor_pos(void)
     setcursor(cursory, cursorx);
 }
 
+// Reads a single character from the photoresistors, then prints it to the LCD.
 void read_and_print_char(void)
 {
     printChar(read_char());
@@ -115,19 +120,21 @@ void read_and_print_char(void)
     increment_cursor_pos();
 }
 
+// Main loop function that checks for button presses.
 void loop(void)
 {
+    // Backspace button
     if (_RB11 == 0)
     {
         delay(100);
         decrement_cursor_pos();
         printChar(0xA0);
-        cursorx = ((cursorx == 9) ? 0 : (cursorx + 1)); 
-        cursory = ((cursorx == 0) ? (cursory + 1) : cursory);
+        increment_cursor_pos();
         decrement_cursor_pos();
-        while(!_RB11);
+        while (!_RB11);
     }
     
+    // Read character button
     if (_RB10 == 0)
     {
         delay(100);
