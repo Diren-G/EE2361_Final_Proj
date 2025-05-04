@@ -28,6 +28,9 @@ Supported Functions:
 
 
 Basic Usage Example:
-	- 
+	- Single bit case utilizing a single photo resistor
+	- Allows you to read and append either a 1 or a 0 to indicate what the current status of the photoresistor is
 
 Complete Usage Example:
+	- Multi character / word reading 
+	- Read 8 photoresistors to be identify words and parse more complicated readers.
